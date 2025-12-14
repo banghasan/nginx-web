@@ -1,0 +1,5 @@
+# Menggunakan base image varian "full"
+FROM ghcr.io/11notes/nginx:full-1.28.0
+
+# Menyalin file konfigurasi nginx kustom yang sama
+COPY default.conf /nginx/etc/default.conf

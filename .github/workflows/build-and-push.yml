@@ -14,7 +14,15 @@ jobs:
     permissions:
       contents: read
       packages: write
-
+    strategy:
+      matrix:
+        include:
+          - name: "default"
+            dockerfile: "Dockerfile"
+            tag_prefix: ""
+          - name: "full"
+            dockerfile: "Dockerfile.full"
+            tag_prefix: "full-"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,10 +40,11 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push ${{ matrix.name }} variant
         uses: docker/build-push-action@v6
         with:
           context: .
+          file: ./${{ matrix.dockerfile }}
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: ghcr.io/banghasan/nginx-web:${{ github.event.inputs.tag }}
+          tags: ghcr.io/banghasan/nginx-web:${{ matrix.tag_prefix }}${{ github.event.inputs.tag }}
