@@ -2,6 +2,11 @@ name: Build and Push Docker Image
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "The Docker tag for the image"
+        required: true
+        default: "latest"
 
 jobs:
   build-and-push:
@@ -33,4 +38,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/banghasan/nginx-web:latest
+          tags: ghcr.io/banghasan/nginx-web:${{ github.event.inputs.tag }}
