@@ -1,0 +1,12 @@
+services:
+  nginx-web:
+    build: .
+    image: banghasan/nginx-web-local
+    container_name: nginx-web-test
+    restart: unless-stopped
+    environment:
+      TZ: "Asia/Jakarta"
+    ports:
+      - "8000:80"
+    volumes:
+      - "./html:/nginx/var/html"
