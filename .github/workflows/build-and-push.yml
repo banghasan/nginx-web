@@ -23,9 +23,11 @@ jobs:
           - name: "default"
             dockerfile: "Dockerfile"
             tag_prefix: ""
+            platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           - name: "full"
             dockerfile: "Dockerfile.full"
             tag_prefix: "full-"
+            platforms: "linux/amd64,linux/arm64"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,7 +50,7 @@ jobs:
         with:
           context: .
           file: ./${{ matrix.dockerfile }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: ${{ matrix.platforms }}
           push: true
           tags: ghcr.io/banghasan/nginx-web:${{ matrix.tag_prefix }}${{ github.event.inputs.tag }}
           build-args: |
