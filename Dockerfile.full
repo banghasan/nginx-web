@@ -4,3 +4,14 @@ FROM ghcr.io/11notes/nginx:full-${NGINX_VERSION}
 
 # Menyalin file konfigurasi nginx kustom yang sama
 COPY default.conf /nginx/etc/default.conf
+
+# Install localhealth if not present
+#RUN if [ ! -f /usr/local/bin/localhealth ]; then \
+#        curl -L https://raw.githubusercontent.com/mcuadros/ofelia/master/localhealth/localhealth -o /tmp/localhealth && \
+#        chmod +x /tmp/localhealth && \
+#        mv /tmp/localhealth /usr/local/bin/localhealth; \
+#    fi
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD /usr/local/bin/localhealth http://127.0.0.1:80/health -I
