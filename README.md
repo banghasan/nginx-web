@@ -45,6 +45,18 @@ services:
       - "8000:80"
     volumes:
       - "/path/to/your/website:/nginx/var/html"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/localhealth",
+          "http://127.0.0.1:80/health",
+          "-I",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 ```
 
 ### Full Variant Example
