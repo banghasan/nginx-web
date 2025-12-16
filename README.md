@@ -74,6 +74,18 @@ services:
       - "8001:80" # Using a different host port to avoid conflicts
     volumes:
       - "/path/to/your/website:/nginx/var/html"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/usr/local/bin/localhealth",
+          "http://127.0.0.1:80/health",
+          "-I",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 ```
 
 **Note:** In both examples, replace `/path/to/your/website` with the actual path to your web files and run `docker-compose up -d`.
