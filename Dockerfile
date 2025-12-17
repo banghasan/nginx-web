@@ -1,4 +1,4 @@
-ARG NGINX_VERSION=1.28.0
+ARG NGINX_VERSION=latest
 # Menggunakan base image yang ditentukan
 FROM ghcr.io/11notes/nginx:${NGINX_VERSION}
 
