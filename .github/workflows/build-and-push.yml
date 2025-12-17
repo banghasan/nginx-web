@@ -8,9 +8,6 @@ on:
         required: true
         default: "latest"
 
-env:
-  NGINX_VERSION: 1.28.0
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -53,5 +50,3 @@ jobs:
           platforms: ${{ matrix.platforms }}
           push: true
           tags: ghcr.io/banghasan/nginx-web:${{ matrix.tag_prefix }}${{ github.event.inputs.tag }}
-          build-args: |
-            NGINX_VERSION=${{ env.NGINX_VERSION }}

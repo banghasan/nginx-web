@@ -1,7 +1,4 @@
-ARG NGINX_VERSION=latest
-# Menggunakan base image varian "full"
+ARG NGINX_VERSION=1.28.0
 FROM ghcr.io/11notes/nginx:full-${NGINX_VERSION}
-
-# Menyalin file konfigurasi nginx kustom yang sama
 COPY default.conf /nginx/etc/default.conf
 COPY ping.conf /nginx/etc/ping.conf
