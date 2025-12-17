@@ -12,13 +12,23 @@ The image is available on GitHub Container Registry: `ghcr.io/banghasan/nginx-we
 - Easy to use and customize via volume mounts.
 - Provides two variants: a minimal image and a `full` image with more tools.
 
+
+# COMPARISON
+Below you find a comparison between this image and the most used or original one.
+
+| **image** | **size on disk** | **init default as** | **distroless** | supported architectures
+| ---: | ---: | :---: | :---: | :---: |
+| nginx-web | 4.12MB | 1000:1000 | ✅ | amd64, arm64, armv7 |
+| nginx:1.29.4-alpine | 78.24MB | 0:0 | ❌ | 386, amd64, arm64v8, armv5, armv7, mips64le, ppc64le, s390x |
+| nginx | 217MB | 0:0 | ❌ | 386, amd64, arm64v8, armv5, armv7, mips64le, ppc64le, s390x |
+
 ## Variants
 
-This image comes in two variants, available via different tags. The tag you provide during the manual GitHub Actions run (e.g., `latest`, `1.0.0`) will be applied to both variants.
+This image comes in two variants, available via different tags. 
 
 #### Standard Variant
 - **Tags:** `:latest`, `:[version]`
-- **Base Image:** `11notes/nginx:1.28.0`
+- **Base Image:** `11notes/nginx` (lite version)
 - **Description:** This is the standard, minimal image suitable for most use cases.
 
 #### Full Variant
